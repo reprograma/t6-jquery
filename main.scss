@@ -34,14 +34,15 @@ body {
 
         .board {  
             height: 30px;
-            width: 103px;
+            width: 90px;
             background-color: black;
             border: 2px inset darkgray;
             padding: 3px 5px;
             position: relative;
             color: red;
-            font-family: "Orbitron", monospace;
+            font-family: monospace;
             font-size: 25px;
+            font-weight: bold;
 
             span {
                 position: absolute;
@@ -70,8 +71,10 @@ body {
             td {
                 border: 2px solid darkgray;
                 padding: 0 3px;
-                font-family: "VT323", monospace;
-                font-size: 12px;
+                font-family: monospace;
+                font-size: 20px;
+                font-weight: bold;
+                text-align: center;
                 height: 30px;
                 width: 30px;
 
