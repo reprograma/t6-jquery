@@ -1,0 +1,87 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    padding: 50px;
+    background-image: url('https://www.cnews.cz/wp-content/uploads/2017/05/windows-xp-wallpaper.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.button {
+    border: 4px outset darkgray;
+    padding: 5px;
+
+    &:active {
+        border-style: inset;
+    }
+}
+
+#game {
+    background-color: lightgray;
+    border: 4px outset darkgray;
+    width: 460px;
+
+    #header {
+        padding: 15px;
+        border: 4px inset lightgray;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+
+        .board {  
+            height: 30px;
+            width: 103px;
+            background-color: black;
+            border: 2px inset darkgray;
+            padding: 3px 5px;
+            position: relative;
+            color: red;
+            font-family: "Orbitron", monospace;
+            font-size: 25px;
+
+            span {
+                position: absolute;
+                opacity: .4;
+            }
+        }
+
+        #reset {
+            height: 33px;
+            width: 33px;
+            background-color: lightgray;
+            background-image: url('https://img.fireden.net/v/image/1532/40/1532402327606.png');
+            background-size: 200% 200%;
+            background-position: 0 0;
+            background-repeat: no-repeat;
+            background-blend-mode: multiply;
+        }
+    }
+
+    #field {
+        border: 4px inset lightgray;
+
+        table {
+            border-collapse: collapse;
+
+            td {
+                border: 2px solid darkgray;
+                padding: 0 3px;
+                font-family: "VT323", monospace;
+                font-size: 12px;
+                height: 30px;
+                width: 30px;
+
+                &.mine {
+                    background-image: url('https://is3-ssl.mzstatic.com/image/thumb/Purple111/v4/6c/be/c0/6cbec0e2-6dc3-8736-dc19-3a1f4f663ee6/source/512x512bb.jpg');
+                    background-size: cover;
+                    background-color: lightgray;
+                    background-blend-mode: multiply;
+                }
+            }
+        }
+    }
+}
