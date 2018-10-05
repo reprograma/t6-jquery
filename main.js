@@ -30,7 +30,7 @@ function getAdjacentCellIndexes(x, y) {
         [ x + 1, y + 1 ]
     ], function (element) {
         return element[0] >= 0 && element[1] >= 0
-            && element[0] < WIDTH && element[0] < HEIGHT
+            && element[0] < WIDTH && element[1] < HEIGHT
     });
 }
 
