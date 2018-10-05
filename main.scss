@@ -1,0 +1,175 @@
+$windows-blue: #082366;
+$windows-light-gray: #d6cfc7;
+
+* {
+    box-sizing: border-box;
+    font-family: sans-serif;
+    padding: 0;
+    margin: 0;
+    color: black;
+    width: auto;
+}
+
+body {
+    padding: 50px;
+    background-image: url('./imgs/bg.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100vh;
+    position: relative;
+}
+
+.button {
+    background-color: $windows-light-gray;
+    border: 4px outset darkgray;
+    padding: 5px;
+
+    &:active {
+        border-style: inset;
+    }
+}
+
+#footer {
+    background-color: $windows-light-gray;
+    position: absolute;
+    border: 2px outset darkgray;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+
+    .button {
+        display: inline-block;
+        font-family: sans-serif;
+        font-weight: bold;
+        margin: 2px;
+
+        img {
+            width: 20px;
+        }
+    }
+}
+
+.window {
+    background-color: $windows-light-gray;
+    border: 2px outset darkgray;
+    margin: auto;
+    padding: 3px;
+    width: 480px;
+    font-size: 14px;
+
+    .window-header {
+        background-color: $windows-blue;
+        font-weight: bold;
+        padding: 5px;
+
+        p {
+            color: white;
+        }
+    }
+
+    .window-controls {
+        padding: 10px 5px;
+
+        a {
+            text-decoration: none;
+            display: inline-block;
+            margin-right: 10px;
+
+            &:hover {
+                background-color: $windows-blue;
+                color: white;
+            }
+        }
+    }
+}
+
+#game {
+    background-color: $windows-light-gray;
+    border: 4px outset darkgray;
+
+    #header {
+        padding: 15px;
+        border: 4px inset $windows-light-gray;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+
+        .board {  
+            height: 30px;
+            width: 90px;
+            background-color: black;
+            border: 2px inset darkgray;
+            padding: 3px 5px;
+            position: relative;
+            color: red;
+            font-family: monospace;
+            font-size: 25px;
+            font-weight: bold;
+
+            span {
+                position: absolute;
+                opacity: .4;
+            }
+        }
+
+        #reset {
+            height: 33px;
+            width: 33px;
+            background-color: $windows-light-gray;
+            background-image: url('./imgs/icons/reset.png');
+            background-size: 200% 200%;
+            background-position: 0 0;
+
+            &.game-over {
+                background-position: 100% 100%;
+            }
+
+            &.winner {
+                background-position: 0 100%;
+            }
+
+            &.wow {
+                background-position: 100% 0;
+            }
+        }
+    }
+
+    #field {
+        border: 4px inset $windows-light-gray;
+
+        table {
+            border-collapse: collapse;
+
+            td {
+                border: 2px solid darkgray;
+                font-family: monospace;
+                font-size: 20px;
+                font-weight: bold;
+                text-align: center;
+                position: relative;
+                height: 30px;
+                width: 30px;
+
+                .button {
+                    width: 30px;
+                    height: 30px;
+                    border-width: 4px;
+                    border-color: #fafafa;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+
+                    &.red-flag {
+                        background-image: url('./imgs/icons/red-flag.png');
+                        background-size: cover;
+                    }
+                }
+
+                &.mine {
+                    background-image: url('./imgs/icons/mine.png');
+                    background-size: cover;
+                }
+            }
+        }
+    }
+}

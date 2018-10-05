@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Campo Minado</title>
+	<link rel="stylesheet" href="./main.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E=" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="window">
+        <div class="window-header">
+            <p>Campo Minado</p>
+        </div>
+        <div class="window-controls">
+            <a href="">Jogo</a>
+            <a href="">Ajuda</a>
+        </div>
+        <div id="game">
+            <div id="header">
+                <div class="board" id="mines"></div>
+                <div class="button" id="reset"></div>
+                <div class="board" id="timer"></div>
+            </div>
+            <div id="field">
+                <table></table>
+            </div>
+        </div>
+    </div>
+    <div id="footer">
+        <div class="button">
+            <img src="./imgs/icons/start-button.png">
+            <span>Iniciar</span>
+        </div>
+    </div>
+	<script src="./main.js"></script>
+</body>
+</html>
