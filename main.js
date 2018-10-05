@@ -53,7 +53,7 @@ var mine_indexes = getUniqueRandomIndexesIn2DArray(field_matrix);
 $.each(mine_indexes, function(index, coordinates) {
     var x = coordinates[0];
     var y = coordinates[1];
-    var mine = $(field_matrix[x][y]);
+    var mine = $(field_matrix[y][x]);
     mine.addClass("mine");
 })
 
@@ -62,7 +62,7 @@ $.each(mine_indexes, function (index, coordinates) {
     $.each(adjacent_cells, function(index, coordinates) {
         var x = coordinates[0];
         var y = coordinates[1];
-        var cell = $(field_matrix[x][y]);
+        var cell = $(field_matrix[y][x]);
         if (!cell.hasClass("mine")) {
             var num_mines = cell.data("mines") + 1;
             cell.data("mines", num_mines);
