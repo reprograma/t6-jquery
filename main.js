@@ -2,23 +2,23 @@ MINES = 40;
 HEIGHT = 20;
 WIDTH = 15;
 
-function getUniqueRandomIndexesIn2DArray(table, num, indexes) {
+function getUniqueRandomIndexesIn2DArray(table, indexes) {
     indexes = indexes ? indexes : [];
     for (var i = indexes.length; i < MINES; i++) {
-        var random_row = Math.floor(Math.random() * HEIGHT);
         var random_cell = Math.floor(Math.random() * WIDTH);
+        var random_row = Math.floor(Math.random() * HEIGHT);
         for (var j = 0; j < indexes.length; j++) {
-            if (indexes[j][0] === random_row &&
-                indexes[j][1] === random_cell) {
-                return arguments.callee(table, num, indexes);
+            if (indexes[j][0] === random_cell &&
+                indexes[j][1] === random_row) {
+                return arguments.callee(table, indexes);
             }
-        } 
+        }
         indexes.push([random_cell, random_row]);
     }
     return indexes;
 }
 
-function getAdjacentCells(x, y) {
+function getAdjacentCellIndexes(x, y) {
     return $.grep([
         [ x - 1, y - 1 ],
         [ x, y - 1 ],
@@ -49,8 +49,7 @@ for (var i = 0; i < HEIGHT; i++) {
     field_matrix.push(row_vector);
 }
 
-var mine_indexes = getUniqueRandomIndexesIn2DArray(field_matrix, MINES);
-console.log(mine_indexes)
+var mine_indexes = getUniqueRandomIndexesIn2DArray(field_matrix);
 $.each(mine_indexes, function(index, coordinates) {
     var x = coordinates[0];
     var y = coordinates[1];
@@ -59,7 +58,7 @@ $.each(mine_indexes, function(index, coordinates) {
 })
 
 $.each(mine_indexes, function (index, coordinates) {
-    var adjacent_cells = getAdjacentCells(coordinates[0], coordinates[1], WIDTH, HEIGHT);
+    var adjacent_cells = getAdjacentCellIndexes(coordinates[0], coordinates[1]);
     $.each(adjacent_cells, function(index, coordinates) {
         var x = coordinates[0];
         var y = coordinates[1];
