@@ -12,6 +12,7 @@ body {
 }
 
 .button {
+    background-color: lightgray;
     border: 4px outset darkgray;
     padding: 5px;
 
@@ -59,6 +60,14 @@ body {
             background-position: 0 0;
             background-repeat: no-repeat;
             background-blend-mode: multiply;
+
+            &.game-over {
+                background-position: calc(100% - 1px) 100%;
+            }
+
+            &.winner {
+                background-position: 0 100%;
+            }
         }
     }
 
@@ -70,13 +79,30 @@ body {
 
             td {
                 border: 2px solid darkgray;
-                padding: 0 3px;
                 font-family: monospace;
                 font-size: 20px;
                 font-weight: bold;
                 text-align: center;
+                position: relative;
                 height: 30px;
                 width: 30px;
+
+                .button {
+                    width: 30px;
+                    height: 30px;
+                    border-width: 4px;
+                    border-color: #fafafa;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+
+                    &.red-flag {
+                        background-color: lightgray;
+                        background-image: url('https://i.imgur.com/cf8b0AE.png');
+                        background-size: cover;
+                        background-blend-mode: multiply;
+                    }
+                }
 
                 &.mine {
                     background-image: url('https://is3-ssl.mzstatic.com/image/thumb/Purple111/v4/6c/be/c0/6cbec0e2-6dc3-8736-dc19-3a1f4f663ee6/source/512x512bb.jpg');

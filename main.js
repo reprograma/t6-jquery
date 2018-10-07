@@ -34,7 +34,7 @@ function getAdjacentCellIndexes(x, y) {
     });
 }
 
-var field_matrix = []
+var field_matrix = [];
 var field = $("#field table");
 for (var i = 0; i < HEIGHT; i++) {
     var row_vector = [];
@@ -42,6 +42,53 @@ for (var i = 0; i < HEIGHT; i++) {
     for (var j = 0; j < WIDTH; j++) {
         var mine = $("<td>");
         mine.data("mines", 0);
+
+        var button = $("<div>");
+        button.addClass("button");
+        button.data("coordinates", [j, i]);
+
+        button.contextmenu(function () {
+            return false;
+        });
+
+        button.mousedown(function(event) {
+            if (event.which === 3) {
+                $(this).toggleClass("red-flag");
+            }
+        });
+
+        button.mouseup(function () {
+            if (!$(this).hasClass("red-flag")) {
+                if ($(this).parent().hasClass("mine")) {
+                    $("td .button").each(function (index, button) {
+                        button.remove();
+                    })
+                    $("#reset").addClass("game-over");
+                } else if ($(this).parent().data("mines") > 0) {
+                    $(this).remove();
+                } else if ($(this).parent().data("mines") === 0) {
+                    var coordinates = $(this).data("coordinates");
+                    $(this).remove();
+                    (function (x, y) {
+                        var adjacent_cells = getAdjacentCellIndexes(x, y);
+                        for (var k = 0; k < adjacent_cells.length; k++) {
+                            var x = adjacent_cells[k][0];
+                            var y = adjacent_cells[k][1];
+                            var cell = $(field_matrix[y][x]);
+                            var button = cell.children($(".button"));
+                            if (button.length > 0) {
+                                button.remove();
+                                if (cell.data("mines") === 0) {
+                                    arguments.callee(x, y);
+                                }
+                            }
+                        }
+                    })(coordinates[0], coordinates[1]);
+                }
+            }
+        })
+
+        mine.append(button);
         row.append(mine);
         row_vector.push(mine)
     }
@@ -55,7 +102,7 @@ $.each(mine_indexes, function(index, coordinates) {
     var y = coordinates[1];
     var mine = $(field_matrix[y][x]);
     mine.addClass("mine");
-})
+});
 
 $.each(mine_indexes, function (index, coordinates) {
     var adjacent_cells = getAdjacentCellIndexes(coordinates[0], coordinates[1]);
@@ -66,7 +113,6 @@ $.each(mine_indexes, function (index, coordinates) {
         if (!cell.hasClass("mine")) {
             var num_mines = cell.data("mines") + 1;
             cell.data("mines", num_mines);
-            cell.text(num_mines);
             switch (num_mines) {
                 case 1:
                     cell.css("color", "blue");
@@ -95,7 +141,16 @@ $.each(mine_indexes, function (index, coordinates) {
             }
         }
     })
-})
+});
+
+$.each(field_matrix, function(index, row) {
+    $.each(row, function(index, cell) {
+        var number = $(cell).data("mines");
+        if (number > 0) {
+            $(cell).append(number);
+        }
+    });
+});
 
 
 
