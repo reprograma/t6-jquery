@@ -36,6 +36,7 @@ function getAdjacentCellIndexes(x, y) {
 
 var field_matrix = [];
 var field = $("#field table");
+var interval;
 for (var i = 0; i < HEIGHT; i++) {
     var row_vector = [];
     var row = $("<tr>");
@@ -52,6 +53,13 @@ for (var i = 0; i < HEIGHT; i++) {
         });
 
         button.mousedown(function(event) {
+            if (!interval) {
+                var timer = 0;
+                interval = setInterval(function () {
+                    timer++;
+                    $("#timer").text(timer);
+                }, 1000);
+            }
             if (event.which === 3) {
                 $(this).toggleClass("red-flag");
                 $("#mines").text($(".red-flag").length);
@@ -68,6 +76,7 @@ for (var i = 0; i < HEIGHT; i++) {
                         button.remove();
                     })
                     $("#reset").addClass("game-over");
+                    clearInterval(interval);
                 } else if ($(this).parent().data("mines") > 0) {
                     $(this).remove();
                 } else if ($(this).parent().data("mines") === 0) {
@@ -92,6 +101,7 @@ for (var i = 0; i < HEIGHT; i++) {
 
                 if ($("td .button").length === MINES) {
                     $("#reset").addClass("winner");
+                    clearInterval(interval);
                 }
 
             }
