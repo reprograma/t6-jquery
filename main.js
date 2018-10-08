@@ -36,8 +36,8 @@ function getAdjacentCellIndexes(x, y) {
 }
 
 $("#reset").click(function() {
-    TIMER = false;
     clearInterval(TIMER);
+    TIMER = false;
     $(this).removeClass("game-over winner wow");
     $("#mines").text("");
     $("#timer").text("");
@@ -80,8 +80,8 @@ function minesweeper() {
             });
 
             button.mouseup(function () {
+                $("#reset").removeClass("wow");
                 if (!$(this).hasClass("red-flag")) {
-                    $("#reset").removeClass("wow");
                     if ($(this).parent().hasClass("mine")) {
                         $("td .button").each(function (index, button) {
                             button.remove();
