@@ -54,11 +54,15 @@ for (var i = 0; i < HEIGHT; i++) {
         button.mousedown(function(event) {
             if (event.which === 3) {
                 $(this).toggleClass("red-flag");
+                $("#mines").text($(".red-flag").length);
+            } else {
+                $("#reset").addClass("wow");
             }
         });
 
         button.mouseup(function () {
             if (!$(this).hasClass("red-flag")) {
+                $("#reset").removeClass("wow");
                 if ($(this).parent().hasClass("mine")) {
                     $("td .button").each(function (index, button) {
                         button.remove();
@@ -85,6 +89,11 @@ for (var i = 0; i < HEIGHT; i++) {
                         }
                     })(coordinates[0], coordinates[1]);
                 }
+
+                if ($("td .button").length === MINES) {
+                    $("#reset").addClass("winner");
+                }
+
             }
         })
 
