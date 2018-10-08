@@ -1,19 +1,26 @@
+$windows-blue: #082366;
+$windows-light-gray: #d6cfc7;
+
 * {
     box-sizing: border-box;
+    font-family: sans-serif;
     padding: 0;
     margin: 0;
+    color: black;
+    width: auto;
 }
 
 body {
     padding: 50px;
-    background-image: url('https://www.cnews.cz/wp-content/uploads/2017/05/windows-xp-wallpaper.jpg');
+    background-image: url('./imgs/bg.jpg');
     background-size: cover;
     background-repeat: no-repeat;
-    min-height: 100vh;
+    height: 100vh;
+    position: relative;
 }
 
 .button {
-    background-color: lightgray;
+    background-color: $windows-light-gray;
     border: 4px outset darkgray;
     padding: 5px;
 
@@ -22,14 +29,67 @@ body {
     }
 }
 
+#footer {
+    background-color: $windows-light-gray;
+    position: absolute;
+    border: 2px outset darkgray;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+
+    .button {
+        display: inline-block;
+        font-family: sans-serif;
+        font-weight: bold;
+        margin: 2px;
+
+        img {
+            width: 20px;
+        }
+    }
+}
+
+.window {
+    background-color: $windows-light-gray;
+    border: 2px outset darkgray;
+    margin: auto;
+    padding: 3px;
+    width: 480px;
+    font-size: 14px;
+
+    .window-header {
+        background-color: $windows-blue;
+        font-weight: bold;
+        padding: 5px;
+
+        p {
+            color: white;
+        }
+    }
+
+    .window-controls {
+        padding: 10px 5px;
+
+        a {
+            text-decoration: none;
+            display: inline-block;
+            margin-right: 10px;
+
+            &:hover {
+                background-color: $windows-blue;
+                color: white;
+            }
+        }
+    }
+}
+
 #game {
-    background-color: lightgray;
+    background-color: $windows-light-gray;
     border: 4px outset darkgray;
-    width: 460px;
 
     #header {
         padding: 15px;
-        border: 4px inset lightgray;
+        border: 4px inset $windows-light-gray;
         display: flex;
         justify-content: space-around;
         align-items: center;
@@ -55,15 +115,13 @@ body {
         #reset {
             height: 33px;
             width: 33px;
-            background-color: lightgray;
-            background-image: url('https://img.fireden.net/v/image/1532/40/1532402327606.png');
+            background-color: $windows-light-gray;
+            background-image: url('./imgs/icons/reset.png');
             background-size: 200% 200%;
             background-position: 0 0;
-            background-repeat: no-repeat;
-            background-blend-mode: multiply;
 
             &.game-over {
-                background-position: calc(100% - 1px) 100%;
+                background-position: 100% 100%;
             }
 
             &.winner {
@@ -71,13 +129,13 @@ body {
             }
 
             &.wow {
-                background-position: calc(100% - 1px) 0;
+                background-position: 100% 0;
             }
         }
     }
 
     #field {
-        border: 4px inset lightgray;
+        border: 4px inset $windows-light-gray;
 
         table {
             border-collapse: collapse;
@@ -102,18 +160,14 @@ body {
                     left: 0;
 
                     &.red-flag {
-                        background-color: lightgray;
-                        background-image: url('https://i.imgur.com/cf8b0AE.png');
+                        background-image: url('./imgs/icons/red-flag.png');
                         background-size: cover;
-                        background-blend-mode: multiply;
                     }
                 }
 
                 &.mine {
-                    background-image: url('https://is3-ssl.mzstatic.com/image/thumb/Purple111/v4/6c/be/c0/6cbec0e2-6dc3-8736-dc19-3a1f4f663ee6/source/512x512bb.jpg');
+                    background-image: url('./imgs/icons/mine.png');
                     background-size: cover;
-                    background-color: lightgray;
-                    background-blend-mode: multiply;
                 }
             }
         }
