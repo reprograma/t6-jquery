@@ -2,15 +2,15 @@ MINES = 40;
 HEIGHT = 20;
 WIDTH = 15;
 
-function getUniqueRandomIndexesIn2DArray(table, indexes) {
+function getUniqueRandomIndexesInField(indexes) {
     indexes = indexes ? indexes : [];
     for (var i = indexes.length; i < MINES; i++) {
-        var random_cell = Math.floor(Math.random() * WIDTH);
-        var random_row = Math.floor(Math.random() * HEIGHT);
+        var random_cell = Math.floor(Math.random() * WIDTH); // x
+        var random_row = Math.floor(Math.random() * HEIGHT); // y
         for (var j = 0; j < indexes.length; j++) {
             if (indexes[j][0] === random_cell &&
                 indexes[j][1] === random_row) {
-                return arguments.callee(table, indexes);
+                return arguments.callee(indexes);
             }
         }
         indexes.push([random_cell, random_row]);
@@ -28,9 +28,9 @@ function getAdjacentCellIndexes(x, y) {
         [ x - 1, y + 1 ],
         [ x, y + 1 ],
         [ x + 1, y + 1 ]
-    ], function (element) {
-        return element[0] >= 0 && element[1] >= 0
-            && element[0] < WIDTH && element[0] < HEIGHT
+    ], function (coordinate) {
+        return coordinate[0] >= 0 && coordinate[1] >= 0
+            && coordinate[0] < WIDTH && coordinate[1] < HEIGHT
     });
 }
 
@@ -40,33 +40,34 @@ for (var i = 0; i < HEIGHT; i++) {
     var row_vector = [];
     var row = $("<tr>");
     for (var j = 0; j < WIDTH; j++) {
-        var mine = $("<td>");
-        mine.data("mines", 0);
+        var cell = $("<td>");
+        cell.data("mines", 0);
 
-        row.append(mine);
-        row_vector.push(mine)
+        row.append(cell);
+        row_vector.push(cell);
     }
     field.append(row);
     field_matrix.push(row_vector);
 }
 
-var mine_indexes = getUniqueRandomIndexesIn2DArray(field_matrix);
+var mine_indexes = getUniqueRandomIndexesInField();
 $.each(mine_indexes, function(index, coordinates) {
     var x = coordinates[0];
     var y = coordinates[1];
-    var mine = $(field_matrix[x][y]);
+    var mine = $(field_matrix[y][x]);
     mine.addClass("mine");
 });
 
 $.each(mine_indexes, function (index, coordinates) {
-    var adjacent_cells = getAdjacentCellIndexes(coordinates[1], coordinates[0]);
+    var adjacent_cells = getAdjacentCellIndexes(coordinates[0], coordinates[1]);
     $.each(adjacent_cells, function(index, coordinates) {
         var x = coordinates[0];
         var y = coordinates[1];
-        var cell = $(field_matrix[x][y]);
+        var cell = $(field_matrix[y][x]);
         if (!cell.hasClass("mine")) {
             var num_mines = cell.data("mines") + 1;
             cell.data("mines", num_mines);
+            cell.text(num_mines);
             switch (num_mines) {
                 case 1:
                     cell.css("color", "blue");
@@ -95,13 +96,4 @@ $.each(mine_indexes, function (index, coordinates) {
             }
         }
     })
-});
-
-$.each(field_matrix, function(index, row) {
-    $.each(row, function(index, cell) {
-        var number = $(cell).data("mines");
-        if (number > 0) {
-            $(cell).append(number);
-        }
-    });
 });
