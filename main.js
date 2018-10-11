@@ -1,6 +1,6 @@
-MINES = 40;
-HEIGHT = 20;
-WIDTH = 15;
+MINES = 10;
+HEIGHT = 8;
+WIDTH = 8;
 TIMER = false;
 
 function getUniqueRandomIndexesIn2DArray(table, indexes) {
@@ -35,20 +35,57 @@ function getAdjacentCellIndexes(x, y) {
     });
 }
 
-$("#reset").click(function() {
+function resetBoard() {
+    $("#reset").removeClass("game-over wow winner");
+    $("#field table, #mines, #timer").html("");
     clearInterval(TIMER);
     TIMER = false;
-    $(this).removeClass("game-over winner wow");
-    $("#mines").text("");
-    $("#timer").text("");
+}
+
+$("#reset").click(function () {
+    resetBoard();
     minesweeper();
 });
+
+$("#levels").hover(
+    function() {
+        $("#levels ul").show();
+    },
+    function () {
+        $("#levels ul").hide();
+    }
+);
+
+$("#beginner").click(function() {
+    resetBoard();
+    MINES = 10;
+    HEIGHT = 8;
+    WIDTH = 8;
+    minesweeper();
+})
+
+$("#intermediate").click(function() {
+    resetBoard();
+    MINES = 40;
+    HEIGHT = 16;
+    WIDTH = 16;
+    minesweeper();
+})
+
+$("#advanced").click(function() {
+    resetBoard();
+    MINES = 99;
+    HEIGHT = 24;
+    WIDTH = 24;
+    minesweeper();
+})
+
+minesweeper();
 
 function minesweeper() {
     var field_matrix = [];
     var field = $("#field table");
     var counter = 0;
-    field.html("");
     for (var i = 0; i < HEIGHT; i++) {
         var row_vector = [];
         var row = $("<tr>");
@@ -182,5 +219,3 @@ function minesweeper() {
         });
     });
 }
-
-minesweeper();

@@ -17,6 +17,9 @@ body {
     background-repeat: no-repeat;
     min-height: 100vh;
     position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .button {
@@ -54,8 +57,8 @@ body {
     border: 2px outset darkgray;
     margin: auto;
     padding: 3px;
-    width: 480px;
     font-size: 14px;
+    display: inline-block;
 
     .window-header {
         background-color: $windows-blue;
@@ -69,6 +72,30 @@ body {
 
     .window-controls {
         padding: 10px 5px;
+
+        #levels {
+            display: inline-block;
+            position: relative;
+
+            ul {
+                list-style-type: none;
+                position: absolute;
+                z-index: 99999;
+                background-color: $windows-light-gray;
+                margin-left: -5px;
+                display: none;
+
+                li {
+                    padding: 5px;
+                    border: 1px solid darkgray;
+
+                    &:hover {
+                        background-color: $windows-blue;
+                        color: white;
+                    }
+                }
+            }
+        }
 
         a {
             text-decoration: none;
